@@ -1,11 +1,15 @@
 package com.ecommerce.user.service;
 
+import com.ecommerce.user.dto.AuthResponse;
+import com.ecommerce.user.dto.LoginRequest;
 import com.ecommerce.user.dto.UserDTO;
 import com.ecommerce.user.entity.User;
 import com.ecommerce.user.repository.UserRepository;
+import com.ecommerce.user.util.JwtUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,10 +22,27 @@ public class UserService {
     
     private final UserRepository userRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtUtil jwtUtil;
     
-    public UserService(UserRepository userRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public UserService(UserRepository userRepository, KafkaTemplate<String, Object> kafkaTemplate,
+                      PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
         this.userRepository = userRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.passwordEncoder = passwordEncoder;
+        this.jwtUtil = jwtUtil;
+    }
+    
+    public AuthResponse login(LoginRequest request) {
+        User user = userRepository.findByUsername(request.getUsername())
+            .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+        
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new RuntimeException("Invalid username or password");
+        }
+        
+        String token = jwtUtil.generateToken(user.getUsername());
+        return new AuthResponse(token, user.getUsername(), "Login successful");
     }
     
     @Cacheable(value = "users", key = "#id")
@@ -52,6 +73,8 @@ public class UserService {
         if (userRepository.existsByEmail(user.getEmail())) {
             throw new RuntimeException("Email already exists");
         }
+        // Encode password before saving
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
         
         // Publish user created event

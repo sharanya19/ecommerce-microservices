@@ -180,10 +180,61 @@ services:
       - redis
       - kafka
 
+  zipkin:
+    image: openzipkin/zipkin:latest
+    container_name: zipkin
+    ports:
+      - "9411:9411"
+    networks:
+      - ecommerce-network
+    environment:
+      - STORAGE_TYPE=mem
+
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.0
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - xpack.security.enabled=false
+    ports:
+      - "9200:9200"
+    networks:
+      - ecommerce-network
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.0
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline:/usr/share/logstash/pipeline
+      - ./logstash/config:/usr/share/logstash/config
+    ports:
+      - "5044:5044"
+      - "9600:9600"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - elasticsearch
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.0
+    container_name: kibana
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+    ports:
+      - "5601:5601"
+    networks:
+      - ecommerce-network
+    depends_on:
+      - elasticsearch
+
 networks:
   ecommerce-network:
     driver: bridge
 
 volumes:
   mysql_data:
+  elasticsearch_data:
 
