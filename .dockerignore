@@ -1,0 +1,13 @@
+.gradle
+build
+!build/libs/*.jar
+.git
+.gitignore
+README.md
+*.md
+.idea
+.vscode
+*.iml
+.DS_Store
+Thumbs.db
+
