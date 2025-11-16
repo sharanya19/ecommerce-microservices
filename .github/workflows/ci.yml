@@ -53,6 +53,9 @@ jobs:
     - name: Build with Gradle
       run: |
         export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
+        # Disable git operations to prevent git errors
+        export GIT_CONFIG_GLOBAL=/dev/null
+        export GIT_CONFIG_SYSTEM=/dev/null
         if [ -f gradlew ]; then
           ./gradlew build -x test --no-daemon --stacktrace || echo "Gradle build failed, continuing..."
         else
@@ -63,6 +66,9 @@ jobs:
     - name: Run tests
       run: |
         export GRADLE_OPTS="-Dorg.gradle.daemon=false -Dorg.gradle.parallel=false"
+        # Disable git operations to prevent git errors
+        export GIT_CONFIG_GLOBAL=/dev/null
+        export GIT_CONFIG_SYSTEM=/dev/null
         if [ -f gradlew ]; then
           ./gradlew test --no-daemon || echo "Tests failed, continuing..."
         else
