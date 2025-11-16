@@ -16,11 +16,12 @@ spec:
       containers:
       - name: config-server
         image: ecommerce/config-server:1.0.0
+        imagePullPolicy: Never
         ports:
         - containerPort: 8888
         env:
         - name: SPRING_PROFILES_ACTIVE
-          value: "k8s"
+          value: "native"
 ---
 apiVersion: v1
 kind: Service

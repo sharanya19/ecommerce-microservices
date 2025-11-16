@@ -36,8 +36,8 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: inventory-service
-        image: ghcr.io/sharanya19/ecommerce-inventory-service:latest
-        imagePullPolicy: IfNotPresent
+        image: ecommerce/inventory-service:1.0.0
+        imagePullPolicy: Never
         ports:
         - name: http
           containerPort: 8084
