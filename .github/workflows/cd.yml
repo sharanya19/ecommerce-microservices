@@ -1,0 +1,109 @@
+name: CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_PREFIX: ${{ github.repository_owner }}/ecommerce
+  KUBERNETES_NAMESPACE: ecommerce
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up kubectl
+      uses: azure/setup-kubectl@v3
+      with:
+        version: 'latest'
+        
+    - name: Set up Helm
+      uses: azure/setup-helm@v3
+      with:
+        version: 'latest'
+        
+    - name: Configure kubectl
+      run: |
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > kubeconfig
+        export KUBECONFIG=./kubeconfig
+        
+    - name: Create namespace
+      run: |
+        kubectl create namespace ${{ env.KUBERNETES_NAMESPACE }} --dry-run=client -o yaml | kubectl apply -f -
+        
+    - name: Create secrets
+      run: |
+        kubectl apply -f k8s/secrets.yaml
+        
+    - name: Create configmaps
+      run: |
+        kubectl apply -f k8s/configmaps.yaml
+        
+    - name: Update image tags in deployments
+      run: |
+        IMAGE_TAG=${{ github.sha }}
+        find k8s -name "*-deployment.yaml" -exec sed -i "s|image: ecommerce/|image: ${{ env.REGISTRY }}/${{ env.IMAGE_PREFIX }}-|g" {} \;
+        find k8s -name "*-deployment.yaml" -exec sed -i "s|:1.0.0|:$IMAGE_TAG|g" {} \;
+        
+    - name: Deploy infrastructure
+      run: |
+        kubectl apply -f k8s/namespace.yaml
+        kubectl apply -f k8s/mysql-deployment.yaml
+        kubectl apply -f k8s/redis-deployment.yaml
+        kubectl apply -f k8s/kafka-deployment.yaml
+        kubectl apply -f k8s/eureka-deployment.yaml
+        kubectl apply -f k8s/config-server-deployment.yaml
+        
+    - name: Deploy services
+      run: |
+        kubectl apply -f k8s/user-service-deployment.yaml
+        kubectl apply -f k8s/product-service-deployment.yaml
+        kubectl apply -f k8s/order-service-deployment.yaml
+        kubectl apply -f k8s/inventory-service-deployment.yaml
+        kubectl apply -f k8s/payment-service-deployment.yaml
+        kubectl apply -f k8s/api-gateway-deployment.yaml
+        
+    - name: Deploy observability
+      run: |
+        kubectl apply -f k8s/otel/otel-collector.yaml
+        kubectl apply -f k8s/servicemonitors.yaml
+        
+    - name: Deploy ingress
+      run: |
+        kubectl apply -f k8s/ingress.yaml
+        
+    - name: Wait for deployments
+      run: |
+        kubectl wait --for=condition=available --timeout=300s deployment/user-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl wait --for=condition=available --timeout=300s deployment/product-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl wait --for=condition=available --timeout=300s deployment/order-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl wait --for=condition=available --timeout=300s deployment/inventory-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl wait --for=condition=available --timeout=300s deployment/payment-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl wait --for=condition=available --timeout=300s deployment/api-gateway -n ${{ env.KUBERNETES_NAMESPACE }}
+        
+    - name: Health check
+      run: |
+        echo "Checking service health..."
+        kubectl get pods -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl get svc -n ${{ env.KUBERNETES_NAMESPACE }}
+        
+    - name: Rollback on failure
+      if: failure()
+      run: |
+        echo "Deployment failed, rolling back..."
+        kubectl rollout undo deployment/user-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl rollout undo deployment/product-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl rollout undo deployment/order-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl rollout undo deployment/inventory-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl rollout undo deployment/payment-service -n ${{ env.KUBERNETES_NAMESPACE }}
+        kubectl rollout undo deployment/api-gateway -n ${{ env.KUBERNETES_NAMESPACE }}
+
