@@ -27,6 +27,19 @@ jobs:
         submodules: false
         fetch-depth: 1
         
+    - name: Clean up submodule references
+      run: |
+        # Remove any invalid submodule references that might cause git errors
+        if [ -f .gitmodules ]; then
+          git config --file=.gitmodules --get-regexp path | cut -d' ' -f2 | while read path; do
+            if [ ! -d "$path" ] || [ ! -f "$path/.git" ]; then
+              echo "Removing invalid submodule reference: $path"
+              git config --file=.gitmodules --remove-section "submodule.$path" 2>/dev/null || true
+            fi
+          done
+        fi
+      continue-on-error: true
+        
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
@@ -76,9 +89,20 @@ jobs:
         fi
       continue-on-error: true
       
+    - name: Check for test reports
+      id: check-test-reports
+      run: |
+        if find . -path "**/build/test-results/test/*.xml" -type f | grep -q .; then
+          echo "test_reports_exist=true" >> $GITHUB_OUTPUT
+        else
+          echo "test_reports_exist=false" >> $GITHUB_OUTPUT
+          echo "No test report files found, skipping test report generation"
+        fi
+      continue-on-error: true
+        
     - name: Generate test report
       uses: dorny/test-reporter@v1
-      if: always()
+      if: always() && steps.check-test-reports.outputs.test_reports_exist == 'true'
       with:
         name: Test Results
         path: '**/build/test-results/test/*.xml'
