@@ -7,7 +7,7 @@ COPY api-gateway/src ./api-gateway/src
 RUN gradle :api-gateway:build -x test --no-daemon
 
 # Runtime stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/api-gateway/build/libs/*.jar app.jar
 EXPOSE 8080

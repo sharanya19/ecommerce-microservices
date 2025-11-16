@@ -7,7 +7,7 @@ COPY user-service/src ./user-service/src
 RUN gradle :user-service:build -x test --no-daemon
 
 # Runtime stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/user-service/build/libs/*.jar app.jar
 EXPOSE 8081

@@ -7,7 +7,7 @@ COPY payment-service/src ./payment-service/src
 RUN gradle :payment-service:build -x test --no-daemon
 
 # Runtime stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/payment-service/build/libs/*.jar app.jar
 EXPOSE 8085

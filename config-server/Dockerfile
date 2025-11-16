@@ -7,7 +7,7 @@ COPY config-server/src ./config-server/src
 RUN gradle :config-server:build -x test --no-daemon
 
 # Runtime stage
-FROM openjdk:17-jdk-slim
+FROM eclipse-temurin:17-jdk
 WORKDIR /app
 COPY --from=build /app/config-server/build/libs/*.jar app.jar
 EXPOSE 8888

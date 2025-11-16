@@ -37,7 +37,7 @@ public class OrderItem {
     
     @PrePersist
     @PreUpdate
-    protected void calculateSubtotal() {
+    public void calculateSubtotal() {
         if (price != null && quantity != null) {
             subtotal = price.multiply(BigDecimal.valueOf(quantity));
         }

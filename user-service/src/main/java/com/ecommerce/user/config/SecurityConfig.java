@@ -26,7 +26,7 @@ public class SecurityConfig {
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/users/register", "/api/users/login", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
+                .requestMatchers("/users/register", "/users/login", "/actuator/**", "/swagger-ui/**", "/v3/api-docs/**").permitAll()
                 .anyRequest().authenticated()
             );
         return http.build();
