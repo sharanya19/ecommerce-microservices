@@ -8,10 +8,12 @@ import com.ecommerce.user.repository.UserRepository;
 import com.ecommerce.user.util.JwtUtil;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,10 +37,10 @@ public class UserService {
     
     public AuthResponse login(LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername())
-            .orElseThrow(() -> new RuntimeException("Invalid username or password"));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password"));
         
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new RuntimeException("Invalid username or password");
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password");
         }
         
         String token = jwtUtil.generateToken(user.getUsername());
@@ -48,14 +50,14 @@ public class UserService {
     @Cacheable(value = "users", key = "#id")
     public UserDTO getUserById(Long id) {
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id));
         return UserDTO.fromEntity(user);
     }
     
     @Cacheable(value = "users", key = "#username")
     public UserDTO getUserByUsername(String username) {
         User user = userRepository.findByUsername(username)
-            .orElseThrow(() -> new RuntimeException("User not found with username: " + username));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with username: " + username));
         return UserDTO.fromEntity(user);
     }
     
@@ -68,10 +70,10 @@ public class UserService {
     @CacheEvict(value = "users", allEntries = true)
     public UserDTO createUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
-            throw new RuntimeException("Username already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
         }
         if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already exists");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Email already exists");
         }
         // Encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -86,7 +88,7 @@ public class UserService {
     @CacheEvict(value = "users", key = "#id")
     public UserDTO updateUser(Long id, User userDetails) {
         User user = userRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("User not found with id: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id));
         
         user.setEmail(userDetails.getEmail());
         user.setFirstName(userDetails.getFirstName());
@@ -105,7 +107,7 @@ public class UserService {
     @CacheEvict(value = "users", key = "#id")
     public void deleteUser(Long id) {
         if (!userRepository.existsById(id)) {
-            throw new RuntimeException("User not found with id: " + id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "User not found with id: " + id);
         }
         userRepository.deleteById(id);
         

@@ -6,10 +6,12 @@ import com.ecommerce.order.entity.OrderItem;
 import com.ecommerce.order.repository.OrderRepository;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.http.HttpStatus;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -30,7 +32,7 @@ public class OrderService {
     @Cacheable(value = "orders", key = "#id")
     public OrderDTO getOrderById(Long id) {
         Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
         return OrderDTO.fromEntity(order);
     }
     
@@ -84,7 +86,7 @@ public class OrderService {
     @CacheEvict(value = "orders", key = "#id")
     public OrderDTO updateOrderStatus(Long id, Order.OrderStatus status) {
         Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
         order.setStatus(status);
         Order updatedOrder = orderRepository.save(order);
         
@@ -97,7 +99,7 @@ public class OrderService {
     @CacheEvict(value = "orders", key = "#id")
     public OrderDTO updatePaymentStatus(Long id, Order.PaymentStatus paymentStatus) {
         Order order = orderRepository.findById(id)
-            .orElseThrow(() -> new RuntimeException("Order not found with id: " + id));
+            .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
         order.setPaymentStatus(paymentStatus);
         
         if (paymentStatus == Order.PaymentStatus.PAID) {

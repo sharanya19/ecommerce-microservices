@@ -5,13 +5,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class PaymentDTO {
+public class PaymentDTO implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Long id;
     private Long orderId;
     private Long userId;
@@ -21,6 +24,7 @@ public class PaymentDTO {
     private String transactionId;
     private String paymentGatewayResponse;
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
     
     public static PaymentDTO fromEntity(Payment payment) {
         PaymentDTO dto = new PaymentDTO();
@@ -33,6 +37,7 @@ public class PaymentDTO {
         dto.setTransactionId(payment.getTransactionId());
         dto.setPaymentGatewayResponse(payment.getPaymentGatewayResponse());
         dto.setCreatedAt(payment.getCreatedAt());
+        dto.setUpdatedAt(payment.getUpdatedAt());
         return dto;
     }
 }
