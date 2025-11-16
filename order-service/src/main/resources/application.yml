@@ -2,7 +2,7 @@ spring:
   application:
     name: order-service
   config:
-    import: configserver:http://config-server:8888
+    import: optional:configserver:http://config-server:8888
   cloud:
     config:
       uri: http://config-server:8888
@@ -14,4 +14,65 @@ spring:
         max-attempts: 6
         max-interval: 2000
         multiplier: 1.1
+
+external:
+  config-server:
+    health-url: http://config-server:8888/actuator/health
+
+resilience4j:
+  retry:
+    instances:
+      configServer:
+        maxAttempts: 3
+        waitDuration: 1s
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 1.5
+  circuitbreaker:
+    instances:
+      configServer:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        failureRateThreshold: 50
+        waitDurationInOpenState: 10s
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+  bulkhead:
+    instances:
+      configServer:
+        maxConcurrentCalls: 5
+        maxWaitDuration: 2s
+  ratelimiter:
+    instances:
+      configServer:
+        limitForPeriod: 5
+        limitRefreshPeriod: 1s
+        timeoutDuration: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: order-service
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        enabled: true
+        url: http://otel-collector:4318/v1/metrics
+        step: 10s
+    tracing:
+      endpoint: http://otel-collector:4317
 

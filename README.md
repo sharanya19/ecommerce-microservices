@@ -31,6 +31,12 @@ This project implements a microservices architecture with the following componen
 - ✅ **Docker Support** - Containerized services
 - ✅ **Kubernetes Deployment** - Production-ready K8s manifests
 
+## 📚 Documentation
+
+- [START_HERE.md](START_HERE.md) – local bootstrap guide
+- [SWAGGER_API_TESTING_GUIDE.md](SWAGGER_API_TESTING_GUIDE.md) – manual API verification
+- [OBSERVABILITY_GUIDE.md](OBSERVABILITY_GUIDE.md) – tracing, Prometheus & Grafana setup
+
 ## 🛠️ Technology Stack
 
 - **Java 17**

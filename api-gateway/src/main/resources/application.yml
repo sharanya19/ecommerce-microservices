@@ -2,7 +2,7 @@ spring:
   application:
     name: api-gateway
   config:
-    import: configserver:http://config-server:8888
+    import: optional:configserver:http://config-server:8888
   cloud:
     config:
       uri: http://config-server:8888
@@ -13,4 +13,31 @@ eureka:
   client:
     service-url:
       defaultZone: http://eureka-server:8761/eureka/
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,prometheus
+  endpoint:
+    prometheus:
+      enabled: true
+  metrics:
+    tags:
+      application: api-gateway
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+  otlp:
+    metrics:
+      export:
+        enabled: true
+        url: http://otel-collector:4318/v1/metrics
+        step: 10s
+    tracing:
+      endpoint: http://otel-collector:4317
+
 

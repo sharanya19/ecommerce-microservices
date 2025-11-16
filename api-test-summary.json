@@ -1,6 +1,6 @@
 {
     "Total":  40,
-    "Timestamp":  "2025-11-16 22:33:50Z",
+    "Timestamp":  "2025-11-17 00:24:53Z",
     "Failed":  0,
     "Results":  [
                     {
@@ -37,7 +37,7 @@
                                                                           "status":  "UP",
                                                                           "details":  {
                                                                                           "total":  1081101176832,
-                                                                                          "free":  974395695104,
+                                                                                          "free":  971040686080,
                                                                                           "threshold":  10485760,
                                                                                           "path":  "/app/.",
                                                                                           "exists":  true
@@ -92,7 +92,7 @@
                                                                           "status":  "UP",
                                                                           "details":  {
                                                                                           "total":  1081101176832,
-                                                                                          "free":  974395695104,
+                                                                                          "free":  971040686080,
                                                                                           "threshold":  10485760,
                                                                                           "path":  "/app/.",
                                                                                           "exists":  true
@@ -147,7 +147,7 @@
                                                                           "status":  "UP",
                                                                           "details":  {
                                                                                           "total":  1081101176832,
-                                                                                          "free":  974395695104,
+                                                                                          "free":  971040686080,
                                                                                           "threshold":  10485760,
                                                                                           "path":  "/app/.",
                                                                                           "exists":  true
@@ -202,7 +202,7 @@
                                                                           "status":  "UP",
                                                                           "details":  {
                                                                                           "total":  1081101176832,
-                                                                                          "free":  974395695104,
+                                                                                          "free":  971040686080,
                                                                                           "threshold":  10485760,
                                                                                           "path":  "/app/.",
                                                                                           "exists":  true
@@ -257,7 +257,7 @@
                                                                           "status":  "UP",
                                                                           "details":  {
                                                                                           "total":  1081101176832,
-                                                                                          "free":  974395695104,
+                                                                                          "free":  971040686080,
                                                                                           "threshold":  10485760,
                                                                                           "path":  "/app/.",
                                                                                           "exists":  true
@@ -286,15 +286,15 @@
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "username":  "apitesterb266ab",
-                                     "email":  "apitesterb266ab@example.test",
+                                     "id":  17,
+                                     "username":  "apitestera4aa09",
+                                     "email":  "apitestera4aa09@example.test",
                                      "firstName":  "API",
                                      "lastName":  "Tester",
                                      "phone":  "9999999999",
                                      "address":  "Hyderabad",
                                      "role":  "CUSTOMER",
-                                     "createdAt":  "2025-11-16T17:03:49.243650641"
+                                     "createdAt":  "2025-11-16T18:54:53.129742097"
                                  }
                     },
                     {
@@ -305,8 +305,8 @@
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "token":  "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhcGl0ZXN0ZXJiMjY2YWIiLCJpYXQiOjE3NjMzMTI2MjksImV4cCI6MTc2MzM5OTAyOX0.J0vJfe2OrCOWBR-8ZepBKyStZn-yeN-wa9ZkHrxXimOetOyeg7ciN4XXF7lxvmdw",
-                                     "username":  "apitesterb266ab",
+                                     "token":  "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhcGl0ZXN0ZXJhNGFhMDkiLCJpYXQiOjE3NjMzMTkyOTMsImV4cCI6MTc2MzQwNTY5M30.Ayu1iae7VxTgnTdJTBMkpk5MRk7g_m8-vajqllQtG4mAHb4pV7aIlIPsAq_k8cC4",
+                                     "username":  "apitestera4aa09",
                                      "message":  "Login successful"
                                  }
                     },
@@ -353,15 +353,15 @@
                                                        "createdAt":  "2025-11-16T16:54:14.578003"
                                                    },
                                                    {
-                                                       "id":  11,
-                                                       "username":  "apitesterb266ab",
-                                                       "email":  "apitesterb266ab@example.test",
+                                                       "id":  17,
+                                                       "username":  "apitestera4aa09",
+                                                       "email":  "apitestera4aa09@example.test",
                                                        "firstName":  "API",
                                                        "lastName":  "Tester",
                                                        "phone":  "9999999999",
                                                        "address":  "Hyderabad",
                                                        "role":  "CUSTOMER",
-                                                       "createdAt":  "2025-11-16T17:03:49.243651"
+                                                       "createdAt":  "2025-11-16T18:54:53.129742"
                                                    }
                                                ],
                                      "Count":  4
@@ -370,58 +370,58 @@
                     {
                         "Name":  "User - Get By Id",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8081/users/11",
+                        "Url":  "http://localhost:8081/users/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "username":  "apitesterb266ab",
-                                     "email":  "apitesterb266ab@example.test",
+                                     "id":  17,
+                                     "username":  "apitestera4aa09",
+                                     "email":  "apitestera4aa09@example.test",
                                      "firstName":  "API",
                                      "lastName":  "Tester",
                                      "phone":  "9999999999",
                                      "address":  "Hyderabad",
                                      "role":  "CUSTOMER",
-                                     "createdAt":  "2025-11-16T17:03:49.243651"
+                                     "createdAt":  "2025-11-16T18:54:53.129742"
                                  }
                     },
                     {
                         "Name":  "User - Get By Username",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8081/users/username/apitesterb266ab",
+                        "Url":  "http://localhost:8081/users/username/apitestera4aa09",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "username":  "apitesterb266ab",
-                                     "email":  "apitesterb266ab@example.test",
+                                     "id":  17,
+                                     "username":  "apitestera4aa09",
+                                     "email":  "apitestera4aa09@example.test",
                                      "firstName":  "API",
                                      "lastName":  "Tester",
                                      "phone":  "9999999999",
                                      "address":  "Hyderabad",
                                      "role":  "CUSTOMER",
-                                     "createdAt":  "2025-11-16T17:03:49.243651"
+                                     "createdAt":  "2025-11-16T18:54:53.129742"
                                  }
                     },
                     {
                         "Name":  "User - Update",
                         "Method":  "PUT",
-                        "Url":  "http://localhost:8081/users/11",
+                        "Url":  "http://localhost:8081/users/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "username":  "apitesterb266ab",
-                                     "email":  "apitesterb266ab@example.test",
+                                     "id":  17,
+                                     "username":  "apitestera4aa09",
+                                     "email":  "apitestera4aa09@example.test",
                                      "firstName":  "API",
                                      "lastName":  "Tester",
                                      "phone":  "1111111111",
                                      "address":  "Hyderabad Updated",
                                      "role":  "CUSTOMER",
-                                     "createdAt":  "2025-11-16T17:03:49.243651"
+                                     "createdAt":  "2025-11-16T18:54:53.129742"
                                  }
                     },
                     {
@@ -432,7 +432,7 @@
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
+                                     "id":  14,
                                      "name":  "API Test Product",
                                      "description":  "Product created during automated API testing",
                                      "price":  2999.99,
@@ -441,19 +441,19 @@
                                      "imageUrl":  "https://example.test/product-image.png",
                                      "sku":  "API-TEST-001",
                                      "status":  "ACTIVE",
-                                     "createdAt":  "2025-11-16T17:03:49.486260214",
-                                     "updatedAt":  "2025-11-16T17:03:49.486280747"
+                                     "createdAt":  "2025-11-16T18:54:53.391759362",
+                                     "updatedAt":  "2025-11-16T18:54:53.391776694"
                                  }
                     },
                     {
                         "Name":  "Product - Get By Id",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8082/products/8",
+                        "Url":  "http://localhost:8082/products/14",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
+                                     "id":  14,
                                      "name":  "API Test Product",
                                      "description":  "Product created during automated API testing",
                                      "price":  2999.99,
@@ -462,8 +462,8 @@
                                      "imageUrl":  "https://example.test/product-image.png",
                                      "sku":  "API-TEST-001",
                                      "status":  "ACTIVE",
-                                     "createdAt":  "2025-11-16T17:03:49.48626",
-                                     "updatedAt":  "2025-11-16T17:03:49.486281"
+                                     "createdAt":  "2025-11-16T18:54:53.391759",
+                                     "updatedAt":  "2025-11-16T18:54:53.391777"
                                  }
                     },
                     {
@@ -489,7 +489,7 @@
                                                        "updatedAt":  "2025-11-16T16:54:16.019495"
                                                    },
                                                    {
-                                                       "id":  8,
+                                                       "id":  14,
                                                        "name":  "API Test Product",
                                                        "description":  "Product created during automated API testing",
                                                        "price":  2999.99,
@@ -498,8 +498,8 @@
                                                        "imageUrl":  "https://example.test/product-image.png",
                                                        "sku":  "API-TEST-001",
                                                        "status":  "ACTIVE",
-                                                       "createdAt":  "2025-11-16T17:03:49.48626",
-                                                       "updatedAt":  "2025-11-16T17:03:49.486281"
+                                                       "createdAt":  "2025-11-16T18:54:53.391759",
+                                                       "updatedAt":  "2025-11-16T18:54:53.391777"
                                                    }
                                                ],
                                      "Count":  2
@@ -528,7 +528,7 @@
                                                        "updatedAt":  "2025-11-16T16:54:16.019495"
                                                    },
                                                    {
-                                                       "id":  8,
+                                                       "id":  14,
                                                        "name":  "API Test Product",
                                                        "description":  "Product created during automated API testing",
                                                        "price":  2999.99,
@@ -537,8 +537,8 @@
                                                        "imageUrl":  "https://example.test/product-image.png",
                                                        "sku":  "API-TEST-001",
                                                        "status":  "ACTIVE",
-                                                       "createdAt":  "2025-11-16T17:03:49.48626",
-                                                       "updatedAt":  "2025-11-16T17:03:49.486281"
+                                                       "createdAt":  "2025-11-16T18:54:53.391759",
+                                                       "updatedAt":  "2025-11-16T18:54:53.391777"
                                                    }
                                                ],
                                      "Count":  2
@@ -547,12 +547,12 @@
                     {
                         "Name":  "Product - Update Stock",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8082/products/8/stock?quantity=120",
+                        "Url":  "http://localhost:8082/products/14/stock?quantity=120",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
+                                     "id":  14,
                                      "name":  "API Test Product",
                                      "description":  "Product created during automated API testing",
                                      "price":  2999.99,
@@ -561,19 +561,19 @@
                                      "imageUrl":  "https://example.test/product-image.png",
                                      "sku":  "API-TEST-001",
                                      "status":  "ACTIVE",
-                                     "createdAt":  "2025-11-16T17:03:49.48626",
-                                     "updatedAt":  "2025-11-16T17:03:49.486281"
+                                     "createdAt":  "2025-11-16T18:54:53.391759",
+                                     "updatedAt":  "2025-11-16T18:54:53.391777"
                                  }
                     },
                     {
                         "Name":  "Product - Update",
                         "Method":  "PUT",
-                        "Url":  "http://localhost:8082/products/8",
+                        "Url":  "http://localhost:8082/products/14",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
+                                     "id":  14,
                                      "name":  "API Test Product Updated",
                                      "description":  "Updated description",
                                      "price":  2499.99,
@@ -582,8 +582,8 @@
                                      "imageUrl":  "https://example.test/product-image-updated.png",
                                      "sku":  "API-TEST-001",
                                      "status":  "ACTIVE",
-                                     "createdAt":  "2025-11-16T17:03:49.48626",
-                                     "updatedAt":  "2025-11-16T17:03:49.534659"
+                                     "createdAt":  "2025-11-16T18:54:53.391759",
+                                     "updatedAt":  "2025-11-16T18:54:53.45633"
                                  }
                     },
                     {
@@ -609,7 +609,7 @@
                                                        "updatedAt":  "2025-11-16T16:54:16.019495"
                                                    },
                                                    {
-                                                       "id":  8,
+                                                       "id":  14,
                                                        "name":  "API Test Product Updated",
                                                        "description":  "Updated description",
                                                        "price":  2499.99,
@@ -618,8 +618,8 @@
                                                        "imageUrl":  "https://example.test/product-image-updated.png",
                                                        "sku":  "API-TEST-001",
                                                        "status":  "ACTIVE",
-                                                       "createdAt":  "2025-11-16T17:03:49.48626",
-                                                       "updatedAt":  "2025-11-16T17:03:49.598246"
+                                                       "createdAt":  "2025-11-16T18:54:53.391759",
+                                                       "updatedAt":  "2025-11-16T18:54:53.513363"
                                                    }
                                                ],
                                      "Count":  2
@@ -628,37 +628,37 @@
                     {
                         "Name":  "Inventory - Create For Product",
                         "Method":  "POST",
-                        "Url":  "http://localhost:8084/inventory/product/8?initialQuantity=60",
+                        "Url":  "http://localhost:8084/inventory/product/14?initialQuantity=60",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  60,
                                      "reservedQuantity":  0,
                                      "availableQuantity":  60,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.624797615"
+                                     "lastUpdated":  "2025-11-16T18:54:53.541393529"
                                  }
                     },
                     {
                         "Name":  "Inventory - Get By Product",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8084/inventory/product/8",
+                        "Url":  "http://localhost:8084/inventory/product/14",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  60,
                                      "reservedQuantity":  0,
                                      "availableQuantity":  60,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.624798"
+                                     "lastUpdated":  "2025-11-16T18:54:53.541394"
                                  }
                     },
                     {
@@ -743,87 +743,147 @@
                                                    {
                                                        "id":  8,
                                                        "productId":  8,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T17:03:49.701211"
+                                                   },
+                                                   {
+                                                       "id":  9,
+                                                       "productId":  9,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T18:27:56.138326"
+                                                   },
+                                                   {
+                                                       "id":  10,
+                                                       "productId":  10,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T18:38:13.265091"
+                                                   },
+                                                   {
+                                                       "id":  11,
+                                                       "productId":  11,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T18:51:20.263464"
+                                                   },
+                                                   {
+                                                       "id":  12,
+                                                       "productId":  12,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T18:53:08.122017"
+                                                   },
+                                                   {
+                                                       "id":  13,
+                                                       "productId":  13,
+                                                       "quantity":  67,
+                                                       "reservedQuantity":  0,
+                                                       "availableQuantity":  67,
+                                                       "minStockLevel":  10,
+                                                       "maxStockLevel":  1000,
+                                                       "lastUpdated":  "2025-11-16T18:53:11.390482"
+                                                   },
+                                                   {
+                                                       "id":  14,
+                                                       "productId":  14,
                                                        "quantity":  60,
                                                        "reservedQuantity":  0,
                                                        "availableQuantity":  60,
                                                        "minStockLevel":  10,
                                                        "maxStockLevel":  1000,
-                                                       "lastUpdated":  "2025-11-16T17:03:49.624798"
+                                                       "lastUpdated":  "2025-11-16T18:54:53.541394"
                                                    }
                                                ],
-                                     "Count":  8
+                                     "Count":  14
                                  }
                     },
                     {
                         "Name":  "Inventory - Adjust Quantity",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8084/inventory/product/8/quantity?quantityChange=10",
+                        "Url":  "http://localhost:8084/inventory/product/14/quantity?quantityChange=10",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  70,
                                      "reservedQuantity":  0,
                                      "availableQuantity":  70,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.624798"
+                                     "lastUpdated":  "2025-11-16T18:54:53.541394"
                                  }
                     },
                     {
                         "Name":  "Inventory - Reserve",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8084/inventory/product/8/reserve?quantity=5",
+                        "Url":  "http://localhost:8084/inventory/product/14/reserve?quantity=5",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  70,
                                      "reservedQuantity":  5,
                                      "availableQuantity":  65,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.658112"
+                                     "lastUpdated":  "2025-11-16T18:54:53.582011"
                                  }
                     },
                     {
                         "Name":  "Inventory - Release",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8084/inventory/product/8/release?quantity=2",
+                        "Url":  "http://localhost:8084/inventory/product/14/release?quantity=2",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  70,
                                      "reservedQuantity":  3,
                                      "availableQuantity":  67,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.67584"
+                                     "lastUpdated":  "2025-11-16T18:54:53.598115"
                                  }
                     },
                     {
                         "Name":  "Inventory - Confirm",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8084/inventory/product/8/confirm?quantity=3",
+                        "Url":  "http://localhost:8084/inventory/product/14/confirm?quantity=3",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  8,
-                                     "productId":  8,
+                                     "id":  14,
+                                     "productId":  14,
                                      "quantity":  67,
                                      "reservedQuantity":  0,
                                      "availableQuantity":  67,
                                      "minStockLevel":  10,
                                      "maxStockLevel":  1000,
-                                     "lastUpdated":  "2025-11-16T17:03:49.688557"
+                                     "lastUpdated":  "2025-11-16T18:54:53.61443"
                                  }
                     },
                     {
@@ -834,13 +894,13 @@
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "userId":  11,
+                                     "id":  17,
+                                     "userId":  17,
                                      "orderItems":  [
                                                         {
-                                                            "id":  11,
-                                                            "productId":  8,
-                                                            "productName":  "Product 8",
+                                                            "id":  17,
+                                                            "productId":  14,
+                                                            "productName":  "Product 14",
                                                             "quantity":  2,
                                                             "price":  100,
                                                             "subtotal":  200
@@ -851,24 +911,24 @@
                                      "billingAddress":  "Hyderabad",
                                      "status":  "PENDING",
                                      "paymentStatus":  "PENDING",
-                                     "createdAt":  "2025-11-16T17:03:49.75612678"
+                                     "createdAt":  "2025-11-16T18:54:53.692465615"
                                  }
                     },
                     {
                         "Name":  "Order - Get By Id",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8083/orders/11",
+                        "Url":  "http://localhost:8083/orders/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "userId":  11,
+                                     "id":  17,
+                                     "userId":  17,
                                      "orderItems":  [
                                                         {
-                                                            "id":  11,
-                                                            "productId":  8,
-                                                            "productName":  "Product 8",
+                                                            "id":  17,
+                                                            "productId":  14,
+                                                            "productName":  "Product 14",
                                                             "quantity":  2,
                                                             "price":  100.00,
                                                             "subtotal":  200.00
@@ -879,7 +939,7 @@
                                      "billingAddress":  "Hyderabad",
                                      "status":  "PENDING",
                                      "paymentStatus":  "PENDING",
-                                     "createdAt":  "2025-11-16T17:03:49.756127"
+                                     "createdAt":  "2025-11-16T18:54:53.692466"
                                  }
                     },
                     {
@@ -1027,31 +1087,118 @@
                                                        "totalAmount":  200.00,
                                                        "shippingAddress":  "Hyderabad",
                                                        "billingAddress":  "Hyderabad",
-                                                       "status":  "PENDING",
-                                                       "paymentStatus":  "PENDING",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
                                                        "createdAt":  "2025-11-16T17:03:49.756127"
-                                                   }
-                                               ],
-                                     "Count":  7
-                                 }
-                    },
-                    {
-                        "Name":  "Order - By User",
-                        "Method":  "GET",
-                        "Url":  "http://localhost:8083/orders/user/11",
-                        "Success":  true,
-                        "StatusCode":  null,
-                        "Message":  "OK",
-                        "Data":  {
-                                     "value":  [
+                                                   },
                                                    {
-                                                       "id":  11,
-                                                       "userId":  11,
+                                                       "id":  12,
+                                                       "userId":  12,
                                                        "orderItems":  [
                                                                           {
-                                                                              "id":  11,
-                                                                              "productId":  8,
-                                                                              "productName":  "Product 8",
+                                                                              "id":  12,
+                                                                              "productId":  9,
+                                                                              "productName":  "Product 9",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
+                                                       "createdAt":  "2025-11-16T18:27:56.210093"
+                                                   },
+                                                   {
+                                                       "id":  13,
+                                                       "userId":  13,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  13,
+                                                                              "productId":  10,
+                                                                              "productName":  "Product 10",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
+                                                       "createdAt":  "2025-11-16T18:38:13.330296"
+                                                   },
+                                                   {
+                                                       "id":  14,
+                                                       "userId":  14,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  14,
+                                                                              "productId":  11,
+                                                                              "productName":  "Product 11",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
+                                                       "createdAt":  "2025-11-16T18:51:20.323474"
+                                                   },
+                                                   {
+                                                       "id":  15,
+                                                       "userId":  15,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  15,
+                                                                              "productId":  12,
+                                                                              "productName":  "Product 12",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
+                                                       "createdAt":  "2025-11-16T18:53:08.177805"
+                                                   },
+                                                   {
+                                                       "id":  16,
+                                                       "userId":  16,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  16,
+                                                                              "productId":  13,
+                                                                              "productName":  "Product 13",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "CONFIRMED",
+                                                       "paymentStatus":  "PAID",
+                                                       "createdAt":  "2025-11-16T18:53:11.447932"
+                                                   },
+                                                   {
+                                                       "id":  17,
+                                                       "userId":  17,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  17,
+                                                                              "productId":  14,
+                                                                              "productName":  "Product 14",
                                                                               "quantity":  2,
                                                                               "price":  100.00,
                                                                               "subtotal":  200.00
@@ -1062,7 +1209,40 @@
                                                        "billingAddress":  "Hyderabad",
                                                        "status":  "PENDING",
                                                        "paymentStatus":  "PENDING",
-                                                       "createdAt":  "2025-11-16T17:03:49.756127"
+                                                       "createdAt":  "2025-11-16T18:54:53.692466"
+                                                   }
+                                               ],
+                                     "Count":  13
+                                 }
+                    },
+                    {
+                        "Name":  "Order - By User",
+                        "Method":  "GET",
+                        "Url":  "http://localhost:8083/orders/user/17",
+                        "Success":  true,
+                        "StatusCode":  null,
+                        "Message":  "OK",
+                        "Data":  {
+                                     "value":  [
+                                                   {
+                                                       "id":  17,
+                                                       "userId":  17,
+                                                       "orderItems":  [
+                                                                          {
+                                                                              "id":  17,
+                                                                              "productId":  14,
+                                                                              "productName":  "Product 14",
+                                                                              "quantity":  2,
+                                                                              "price":  100.00,
+                                                                              "subtotal":  200.00
+                                                                          }
+                                                                      ],
+                                                       "totalAmount":  200.00,
+                                                       "shippingAddress":  "Hyderabad",
+                                                       "billingAddress":  "Hyderabad",
+                                                       "status":  "PENDING",
+                                                       "paymentStatus":  "PENDING",
+                                                       "createdAt":  "2025-11-16T18:54:53.692466"
                                                    }
                                                ],
                                      "Count":  1
@@ -1071,18 +1251,18 @@
                     {
                         "Name":  "Order - Update Status",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8083/orders/11/status?status=SHIPPED",
+                        "Url":  "http://localhost:8083/orders/17/status?status=SHIPPED",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "userId":  11,
+                                     "id":  17,
+                                     "userId":  17,
                                      "orderItems":  [
                                                         {
-                                                            "id":  11,
-                                                            "productId":  8,
-                                                            "productName":  "Product 8",
+                                                            "id":  17,
+                                                            "productId":  14,
+                                                            "productName":  "Product 14",
                                                             "quantity":  2,
                                                             "price":  100.00,
                                                             "subtotal":  200.00
@@ -1093,24 +1273,24 @@
                                      "billingAddress":  "Hyderabad",
                                      "status":  "SHIPPED",
                                      "paymentStatus":  "PENDING",
-                                     "createdAt":  "2025-11-16T17:03:49.756127"
+                                     "createdAt":  "2025-11-16T18:54:53.692466"
                                  }
                     },
                     {
                         "Name":  "Order - Update Payment Status",
                         "Method":  "PATCH",
-                        "Url":  "http://localhost:8083/orders/11/payment-status?paymentStatus=PAID",
+                        "Url":  "http://localhost:8083/orders/17/payment-status?paymentStatus=PAID",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  11,
-                                     "userId":  11,
+                                     "id":  17,
+                                     "userId":  17,
                                      "orderItems":  [
                                                         {
-                                                            "id":  11,
-                                                            "productId":  8,
-                                                            "productName":  "Product 8",
+                                                            "id":  17,
+                                                            "productId":  14,
+                                                            "productName":  "Product 14",
                                                             "quantity":  2,
                                                             "price":  100.00,
                                                             "subtotal":  200.00
@@ -1121,7 +1301,7 @@
                                      "billingAddress":  "Hyderabad",
                                      "status":  "CONFIRMED",
                                      "paymentStatus":  "PAID",
-                                     "createdAt":  "2025-11-16T17:03:49.756127"
+                                     "createdAt":  "2025-11-16T18:54:53.692466"
                                  }
                     },
                     {
@@ -1132,78 +1312,78 @@
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  3,
-                                     "orderId":  11,
-                                     "userId":  11,
+                                     "id":  9,
+                                     "orderId":  17,
+                                     "userId":  17,
                                      "amount":  5999.98,
                                      "paymentMethod":  "CREDIT_CARD",
                                      "status":  "COMPLETED",
-                                     "transactionId":  "TXN1763312629896",
+                                     "transactionId":  "TXN1763319293851",
                                      "paymentGatewayResponse":  "Payment successful",
-                                     "createdAt":  "2025-11-16T17:03:49.896768156",
-                                     "updatedAt":  "2025-11-16T17:03:49.896789167"
+                                     "createdAt":  "2025-11-16T18:54:53.851392269",
+                                     "updatedAt":  "2025-11-16T18:54:53.851418429"
                                  }
                     },
                     {
                         "Name":  "Payment - Get By Id",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8085/payments/3",
+                        "Url":  "http://localhost:8085/payments/9",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  3,
-                                     "orderId":  11,
-                                     "userId":  11,
+                                     "id":  9,
+                                     "orderId":  17,
+                                     "userId":  17,
                                      "amount":  5999.98,
                                      "paymentMethod":  "CREDIT_CARD",
                                      "status":  "COMPLETED",
-                                     "transactionId":  "TXN1763312629896",
+                                     "transactionId":  "TXN1763319293851",
                                      "paymentGatewayResponse":  "Payment successful",
-                                     "createdAt":  "2025-11-16T17:03:49.896768",
-                                     "updatedAt":  "2025-11-16T17:03:49.900104"
+                                     "createdAt":  "2025-11-16T18:54:53.851392",
+                                     "updatedAt":  "2025-11-16T18:54:53.855305"
                                  }
                     },
                     {
                         "Name":  "Payment - By Transaction",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8085/payments/transaction/TXN1763312629896",
+                        "Url":  "http://localhost:8085/payments/transaction/TXN1763319293851",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  3,
-                                     "orderId":  11,
-                                     "userId":  11,
+                                     "id":  9,
+                                     "orderId":  17,
+                                     "userId":  17,
                                      "amount":  5999.98,
                                      "paymentMethod":  "CREDIT_CARD",
                                      "status":  "COMPLETED",
-                                     "transactionId":  "TXN1763312629896",
+                                     "transactionId":  "TXN1763319293851",
                                      "paymentGatewayResponse":  "Payment successful",
-                                     "createdAt":  "2025-11-16T17:03:49.896768",
-                                     "updatedAt":  "2025-11-16T17:03:49.900104"
+                                     "createdAt":  "2025-11-16T18:54:53.851392",
+                                     "updatedAt":  "2025-11-16T18:54:53.855305"
                                  }
                     },
                     {
                         "Name":  "Payment - By Order",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8085/payments/order/11",
+                        "Url":  "http://localhost:8085/payments/order/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
                                      "value":  [
                                                    {
-                                                       "id":  3,
-                                                       "orderId":  11,
-                                                       "userId":  11,
+                                                       "id":  9,
+                                                       "orderId":  17,
+                                                       "userId":  17,
                                                        "amount":  5999.98,
                                                        "paymentMethod":  "CREDIT_CARD",
                                                        "status":  "COMPLETED",
-                                                       "transactionId":  "TXN1763312629896",
+                                                       "transactionId":  "TXN1763319293851",
                                                        "paymentGatewayResponse":  "Payment successful",
-                                                       "createdAt":  "2025-11-16T17:03:49.896768",
-                                                       "updatedAt":  "2025-11-16T17:03:49.900104"
+                                                       "createdAt":  "2025-11-16T18:54:53.851392",
+                                                       "updatedAt":  "2025-11-16T18:54:53.855305"
                                                    }
                                                ],
                                      "Count":  1
@@ -1212,23 +1392,23 @@
                     {
                         "Name":  "Payment - By User",
                         "Method":  "GET",
-                        "Url":  "http://localhost:8085/payments/user/11",
+                        "Url":  "http://localhost:8085/payments/user/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
                                      "value":  [
                                                    {
-                                                       "id":  3,
-                                                       "orderId":  11,
-                                                       "userId":  11,
+                                                       "id":  9,
+                                                       "orderId":  17,
+                                                       "userId":  17,
                                                        "amount":  5999.98,
                                                        "paymentMethod":  "CREDIT_CARD",
                                                        "status":  "COMPLETED",
-                                                       "transactionId":  "TXN1763312629896",
+                                                       "transactionId":  "TXN1763319293851",
                                                        "paymentGatewayResponse":  "Payment successful",
-                                                       "createdAt":  "2025-11-16T17:03:49.896768",
-                                                       "updatedAt":  "2025-11-16T17:03:49.900104"
+                                                       "createdAt":  "2025-11-16T18:54:53.851392",
+                                                       "updatedAt":  "2025-11-16T18:54:53.855305"
                                                    }
                                                ],
                                      "Count":  1
@@ -1273,40 +1453,112 @@
                                                        "userId":  11,
                                                        "amount":  5999.98,
                                                        "paymentMethod":  "CREDIT_CARD",
-                                                       "status":  "COMPLETED",
+                                                       "status":  "REFUNDED",
                                                        "transactionId":  "TXN1763312629896",
-                                                       "paymentGatewayResponse":  "Payment successful",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
                                                        "createdAt":  "2025-11-16T17:03:49.896768",
-                                                       "updatedAt":  "2025-11-16T17:03:49.900104"
+                                                       "updatedAt":  "2025-11-16T17:03:49.985945"
+                                                   },
+                                                   {
+                                                       "id":  4,
+                                                       "orderId":  12,
+                                                       "userId":  12,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "REFUNDED",
+                                                       "transactionId":  "TXN1763317676860",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
+                                                       "createdAt":  "2025-11-16T18:27:56.860279",
+                                                       "updatedAt":  "2025-11-16T18:27:57.420074"
+                                                   },
+                                                   {
+                                                       "id":  5,
+                                                       "orderId":  13,
+                                                       "userId":  13,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "REFUNDED",
+                                                       "transactionId":  "TXN1763318293575",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
+                                                       "createdAt":  "2025-11-16T18:38:13.57508",
+                                                       "updatedAt":  "2025-11-16T18:38:13.74798"
+                                                   },
+                                                   {
+                                                       "id":  6,
+                                                       "orderId":  14,
+                                                       "userId":  14,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "REFUNDED",
+                                                       "transactionId":  "TXN1763319080482",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
+                                                       "createdAt":  "2025-11-16T18:51:20.482911",
+                                                       "updatedAt":  "2025-11-16T18:51:20.563643"
+                                                   },
+                                                   {
+                                                       "id":  7,
+                                                       "orderId":  15,
+                                                       "userId":  15,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "REFUNDED",
+                                                       "transactionId":  "TXN1763319188327",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
+                                                       "createdAt":  "2025-11-16T18:53:08.327502",
+                                                       "updatedAt":  "2025-11-16T18:53:08.391696"
+                                                   },
+                                                   {
+                                                       "id":  8,
+                                                       "orderId":  16,
+                                                       "userId":  16,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "REFUNDED",
+                                                       "transactionId":  "TXN1763319191597",
+                                                       "paymentGatewayResponse":  "Refund processed successfully",
+                                                       "createdAt":  "2025-11-16T18:53:11.5974",
+                                                       "updatedAt":  "2025-11-16T18:53:11.664387"
+                                                   },
+                                                   {
+                                                       "id":  9,
+                                                       "orderId":  17,
+                                                       "userId":  17,
+                                                       "amount":  5999.98,
+                                                       "paymentMethod":  "CREDIT_CARD",
+                                                       "status":  "COMPLETED",
+                                                       "transactionId":  "TXN1763319293851",
+                                                       "paymentGatewayResponse":  "Payment successful",
+                                                       "createdAt":  "2025-11-16T18:54:53.851392",
+                                                       "updatedAt":  "2025-11-16T18:54:53.855305"
                                                    }
                                                ],
-                                     "Count":  3
+                                     "Count":  9
                                  }
                     },
                     {
                         "Name":  "Payment - Refund",
                         "Method":  "POST",
-                        "Url":  "http://localhost:8085/payments/3/refund",
+                        "Url":  "http://localhost:8085/payments/9/refund",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
                         "Data":  {
-                                     "id":  3,
-                                     "orderId":  11,
-                                     "userId":  11,
+                                     "id":  9,
+                                     "orderId":  17,
+                                     "userId":  17,
                                      "amount":  5999.98,
                                      "paymentMethod":  "CREDIT_CARD",
                                      "status":  "REFUNDED",
-                                     "transactionId":  "TXN1763312629896",
+                                     "transactionId":  "TXN1763319293851",
                                      "paymentGatewayResponse":  "Refund processed successfully",
-                                     "createdAt":  "2025-11-16T17:03:49.896768",
-                                     "updatedAt":  "2025-11-16T17:03:49.900104"
+                                     "createdAt":  "2025-11-16T18:54:53.851392",
+                                     "updatedAt":  "2025-11-16T18:54:53.855305"
                                  }
                     },
                     {
                         "Name":  "Product - Delete",
                         "Method":  "DELETE",
-                        "Url":  "http://localhost:8082/products/8",
+                        "Url":  "http://localhost:8082/products/14",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",
@@ -1315,7 +1567,7 @@
                     {
                         "Name":  "User - Delete",
                         "Method":  "DELETE",
-                        "Url":  "http://localhost:8081/users/11",
+                        "Url":  "http://localhost:8081/users/17",
                         "Success":  true,
                         "StatusCode":  null,
                         "Message":  "OK",

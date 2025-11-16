@@ -3,7 +3,9 @@ package com.ecommerce.payment.service;
 import com.ecommerce.payment.dto.CreatePaymentRequest;
 import com.ecommerce.payment.dto.PaymentDTO;
 import com.ecommerce.payment.entity.Payment;
+import com.ecommerce.payment.metrics.PaymentMetricsRecorder;
 import com.ecommerce.payment.repository.PaymentRepository;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -22,10 +24,13 @@ public class PaymentService {
     private final PaymentRepository paymentRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final Random random = new Random();
+    private final PaymentMetricsRecorder metricsRecorder;
     
-    public PaymentService(PaymentRepository paymentRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public PaymentService(PaymentRepository paymentRepository, KafkaTemplate<String, Object> kafkaTemplate,
+                          PaymentMetricsRecorder metricsRecorder) {
         this.paymentRepository = paymentRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.metricsRecorder = metricsRecorder;
     }
     
     @Cacheable(value = "payments", key = "#id")
@@ -60,6 +65,7 @@ public class PaymentService {
     }
     
     @CacheEvict(value = "payments", allEntries = true)
+    @Observed(name = "payment.process", contextualName = "payment-process")
     public PaymentDTO processPayment(CreatePaymentRequest request) {
         Payment payment = new Payment();
         payment.setOrderId(request.getOrderId());
@@ -76,9 +82,11 @@ public class PaymentService {
         if (paymentSuccess) {
             payment.setStatus(Payment.PaymentStatus.COMPLETED);
             payment.setPaymentGatewayResponse("Payment successful");
+            metricsRecorder.recordPaymentCompleted();
         } else {
             payment.setStatus(Payment.PaymentStatus.FAILED);
             payment.setPaymentGatewayResponse("Payment failed - insufficient funds");
+            metricsRecorder.recordPaymentFailed();
         }
         
         Payment updatedPayment = paymentRepository.save(payment);
@@ -90,6 +98,7 @@ public class PaymentService {
     }
     
     @CacheEvict(value = "payments", key = "#id")
+    @Observed(name = "payment.refund", contextualName = "payment-refund")
     public PaymentDTO refundPayment(Long id) {
         Payment payment = paymentRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Payment not found with id: " + id));
@@ -101,6 +110,7 @@ public class PaymentService {
         payment.setStatus(Payment.PaymentStatus.REFUNDED);
         payment.setPaymentGatewayResponse("Refund processed successfully");
         Payment updatedPayment = paymentRepository.save(payment);
+        metricsRecorder.recordRefund();
         
         // Publish payment refunded event
         kafkaTemplate.send("payment-events", "payment.refunded", updatedPayment);

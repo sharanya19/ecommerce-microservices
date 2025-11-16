@@ -3,7 +3,9 @@ package com.ecommerce.order.service;
 import com.ecommerce.order.dto.*;
 import com.ecommerce.order.entity.Order;
 import com.ecommerce.order.entity.OrderItem;
+import com.ecommerce.order.metrics.OrderMetricsRecorder;
 import com.ecommerce.order.repository.OrderRepository;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -23,10 +25,13 @@ public class OrderService {
     
     private final OrderRepository orderRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final OrderMetricsRecorder metricsRecorder;
     
-    public OrderService(OrderRepository orderRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public OrderService(OrderRepository orderRepository, KafkaTemplate<String, Object> kafkaTemplate,
+                        OrderMetricsRecorder metricsRecorder) {
         this.orderRepository = orderRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.metricsRecorder = metricsRecorder;
     }
     
     @Cacheable(value = "orders", key = "#id")
@@ -49,6 +54,7 @@ public class OrderService {
     }
     
     @CacheEvict(value = "orders", allEntries = true)
+    @Observed(name = "order.create", contextualName = "order-create")
     public OrderDTO createOrder(CreateOrderRequest request) {
         Order order = new Order();
         order.setUserId(request.getUserId());
@@ -73,6 +79,7 @@ public class OrderService {
         
         order.setTotalAmount(totalAmount);
         Order savedOrder = orderRepository.save(order);
+        metricsRecorder.recordOrderCreated();
         
         // Publish order created event
         kafkaTemplate.send("order-events", "order.created", savedOrder);
@@ -84,11 +91,13 @@ public class OrderService {
     }
     
     @CacheEvict(value = "orders", key = "#id")
+    @Observed(name = "order.status.update", contextualName = "order-status-update")
     public OrderDTO updateOrderStatus(Long id, Order.OrderStatus status) {
         Order order = orderRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
         order.setStatus(status);
         Order updatedOrder = orderRepository.save(order);
+        metricsRecorder.recordStatusChange(status.name());
         
         // Publish order status updated event
         kafkaTemplate.send("order-events", "order.status.updated", updatedOrder);
@@ -97,6 +106,7 @@ public class OrderService {
     }
     
     @CacheEvict(value = "orders", key = "#id")
+    @Observed(name = "order.payment.update", contextualName = "order-payment-update")
     public OrderDTO updatePaymentStatus(Long id, Order.PaymentStatus paymentStatus) {
         Order order = orderRepository.findById(id)
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found with id: " + id));
@@ -107,6 +117,7 @@ public class OrderService {
         }
         
         Order updatedOrder = orderRepository.save(order);
+        metricsRecorder.recordPaymentStatusChange(paymentStatus.name());
         
         // Publish payment status updated event
         kafkaTemplate.send("order-events", "order.payment.updated", updatedOrder);

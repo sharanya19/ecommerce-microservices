@@ -1,0 +1,31 @@
+groups:
+  - name: ecommerce-alerts
+    rules:
+      - alert: UserRegistrationDrop
+        expr: increase(user_registrations_total[15m]) == 0
+        for: 15m
+        labels:
+          severity: warning
+        annotations:
+          summary: "No user registrations recorded in the last 15 minutes"
+          description: "The user sign-up flow might be experiencing issues."
+
+      - alert: PaymentFailureRateHigh
+        expr: (increase(payments_failed_total[5m]) / (increase(payments_completed_total[5m]) + 1e-6)) > 0.2
+        for: 5m
+        labels:
+          severity: critical
+        annotations:
+          summary: "High payment failure rate detected"
+          description: "More than 20% of the payments failed in the past 5 minutes."
+
+      - alert: InventoryReservationsSpiking
+        expr: increase(inventory_reservations_total[10m]) > 200
+        for: 10m
+        labels:
+          severity: warning
+        annotations:
+          summary: "Inventory reservations spiking"
+          description: "Inventory reservations exceeded 200 actions in 10 minutes."
+
+

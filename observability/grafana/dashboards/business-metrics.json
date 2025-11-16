@@ -1,0 +1,64 @@
+{
+  "id": null,
+  "uid": "business-metrics",
+  "title": "Business KPIs",
+  "schemaVersion": 38,
+  "version": 1,
+  "timezone": "browser",
+  "tags": ["ecommerce", "business"],
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "User Registrations",
+      "id": 1,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(user_registrations_total[5m])",
+          "legendFormat": "Registrations/min",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Payment Failure Rate",
+      "id": 2,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(payments_failed_total[5m]) / (rate(payments_completed_total[5m]) + 1e-6)",
+          "legendFormat": "Failure % (5m)",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "timeseries",
+      "title": "Inventory Reservations",
+      "id": 3,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(inventory_reservations_total[5m])",
+          "legendFormat": "Reservations/min",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "templating": {
+    "list": []
+  }
+}
+
+

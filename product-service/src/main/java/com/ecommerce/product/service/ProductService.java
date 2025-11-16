@@ -2,7 +2,9 @@ package com.ecommerce.product.service;
 
 import com.ecommerce.product.dto.ProductDTO;
 import com.ecommerce.product.entity.Product;
+import com.ecommerce.product.metrics.ProductMetricsRecorder;
 import com.ecommerce.product.repository.ProductRepository;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.core.KafkaTemplate;
@@ -18,10 +20,13 @@ public class ProductService {
     
     private final ProductRepository productRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final ProductMetricsRecorder metricsRecorder;
     
-    public ProductService(ProductRepository productRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public ProductService(ProductRepository productRepository, KafkaTemplate<String, Object> kafkaTemplate,
+                          ProductMetricsRecorder metricsRecorder) {
         this.productRepository = productRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.metricsRecorder = metricsRecorder;
     }
     
     @Cacheable(value = "products", key = "#id")
@@ -51,8 +56,10 @@ public class ProductService {
     }
     
     @CacheEvict(value = "products", allEntries = true)
+    @Observed(name = "product.create", contextualName = "product-create")
     public ProductDTO createProduct(Product product) {
         Product savedProduct = productRepository.save(product);
+        metricsRecorder.recordProductCreated();
         
         // Publish product created event
         kafkaTemplate.send("product-events", "product.created", savedProduct);
@@ -93,6 +100,7 @@ public class ProductService {
     }
     
     @CacheEvict(value = "products", key = "#id")
+    @Observed(name = "product.stock", contextualName = "product-stock-update")
     public ProductDTO updateStock(Long id, Integer quantity) {
         Product product = productRepository.findById(id)
             .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
@@ -103,6 +111,7 @@ public class ProductService {
         }
         
         Product updatedProduct = productRepository.save(product);
+        metricsRecorder.recordStockAdjustment(quantity);
         
         // Publish stock updated event
         kafkaTemplate.send("product-events", "product.stock.updated", updatedProduct);

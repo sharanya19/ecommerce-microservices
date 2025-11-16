@@ -1,0 +1,53 @@
+{
+  "id": null,
+  "uid": "ecommerce-overview",
+  "title": "E-Commerce Overview",
+  "schemaVersion": 38,
+  "version": 1,
+  "timezone": "browser",
+  "refresh": "10s",
+  "tags": ["ecommerce", "overview"],
+  "panels": [
+    {
+      "type": "timeseries",
+      "title": "HTTP Server Requests",
+      "id": 1,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(http_server_requests_seconds_count{application=~\"user-service|product-service|order-service|inventory-service|payment-service\"}[1m])",
+          "legendFormat": "{{application}} {{method}} {{outcome}}",
+          "refId": "A"
+        }
+      ]
+    },
+    {
+      "type": "stat",
+      "title": "Orders Created / min",
+      "id": 2,
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(orders_created_total[5m])",
+          "refId": "A"
+        }
+      ],
+      "options": {
+        "reduceOptions": {
+          "calcs": ["lastNotNull"]
+        }
+      }
+    }
+  ],
+  "templating": {
+    "list": []
+  }
+}
+
+

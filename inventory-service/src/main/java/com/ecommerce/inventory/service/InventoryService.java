@@ -2,7 +2,9 @@ package com.ecommerce.inventory.service;
 
 import com.ecommerce.inventory.dto.InventoryDTO;
 import com.ecommerce.inventory.entity.Inventory;
+import com.ecommerce.inventory.metrics.InventoryMetricsRecorder;
 import com.ecommerce.inventory.repository.InventoryRepository;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -19,10 +21,13 @@ public class InventoryService {
     
     private final InventoryRepository inventoryRepository;
     private final KafkaTemplate<String, Object> kafkaTemplate;
+    private final InventoryMetricsRecorder metricsRecorder;
     
-    public InventoryService(InventoryRepository inventoryRepository, KafkaTemplate<String, Object> kafkaTemplate) {
+    public InventoryService(InventoryRepository inventoryRepository, KafkaTemplate<String, Object> kafkaTemplate,
+                            InventoryMetricsRecorder metricsRecorder) {
         this.inventoryRepository = inventoryRepository;
         this.kafkaTemplate = kafkaTemplate;
+        this.metricsRecorder = metricsRecorder;
     }
     
     @Cacheable(value = "inventory", key = "#productId")
@@ -39,6 +44,7 @@ public class InventoryService {
     }
     
     @CacheEvict(value = "inventory", key = "#productId")
+    @Observed(name = "inventory.create", contextualName = "inventory-create")
     public InventoryDTO createInventory(Long productId, Integer initialQuantity) {
         if (inventoryRepository.findByProductId(productId).isPresent()) {
             throw new RuntimeException("Inventory already exists for product: " + productId);
@@ -50,6 +56,7 @@ public class InventoryService {
         inventory.setReservedQuantity(0);
         
         Inventory savedInventory = inventoryRepository.save(inventory);
+        metricsRecorder.recordInventoryCreated();
         
         // Publish inventory created event
         kafkaTemplate.send("inventory-events", "inventory.created", savedInventory);
@@ -58,12 +65,14 @@ public class InventoryService {
     }
     
     @CacheEvict(value = "inventory", key = "#productId")
+    @Observed(name = "inventory.quantity", contextualName = "inventory-update")
     public InventoryDTO updateQuantity(Long productId, Integer quantityChange) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
             .orElseThrow(() -> new RuntimeException("Inventory not found for product: " + productId));
         
         inventory.setQuantity(inventory.getQuantity() + quantityChange);
         Inventory updatedInventory = inventoryRepository.save(inventory);
+        metricsRecorder.recordQuantityAdjustment(quantityChange);
         
         // Publish inventory updated event
         kafkaTemplate.send("inventory-events", "inventory.updated", updatedInventory);
@@ -72,6 +81,7 @@ public class InventoryService {
     }
     
     @CacheEvict(value = "inventory", key = "#productId")
+    @Observed(name = "inventory.reserve", contextualName = "inventory-reserve")
     public InventoryDTO reserveQuantity(Long productId, Integer quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
             .orElseThrow(() -> new RuntimeException("Inventory not found for product: " + productId));
@@ -82,6 +92,7 @@ public class InventoryService {
         
         inventory.setReservedQuantity(inventory.getReservedQuantity() + quantity);
         Inventory updatedInventory = inventoryRepository.save(inventory);
+        metricsRecorder.recordReservation(quantity);
         
         // Publish inventory reserved event
         kafkaTemplate.send("inventory-events", "inventory.reserved", updatedInventory);
@@ -90,6 +101,7 @@ public class InventoryService {
     }
     
     @CacheEvict(value = "inventory", key = "#productId")
+    @Observed(name = "inventory.release", contextualName = "inventory-release")
     public InventoryDTO releaseReservation(Long productId, Integer quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
             .orElseThrow(() -> new RuntimeException("Inventory not found for product: " + productId));
@@ -101,6 +113,7 @@ public class InventoryService {
     }
     
     @CacheEvict(value = "inventory", key = "#productId")
+    @Observed(name = "inventory.confirm", contextualName = "inventory-confirm")
     public InventoryDTO confirmReservation(Long productId, Integer quantity) {
         Inventory inventory = inventoryRepository.findByProductId(productId)
             .orElseThrow(() -> new RuntimeException("Inventory not found for product: " + productId));
@@ -108,6 +121,7 @@ public class InventoryService {
         inventory.setQuantity(inventory.getQuantity() - quantity);
         inventory.setReservedQuantity(Math.max(0, inventory.getReservedQuantity() - quantity));
         Inventory updatedInventory = inventoryRepository.save(inventory);
+        metricsRecorder.recordReservationConfirmation(quantity);
         
         // Publish inventory confirmed event
         kafkaTemplate.send("inventory-events", "inventory.confirmed", updatedInventory);

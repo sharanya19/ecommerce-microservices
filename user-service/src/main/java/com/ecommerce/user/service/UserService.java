@@ -4,8 +4,10 @@ import com.ecommerce.user.dto.AuthResponse;
 import com.ecommerce.user.dto.LoginRequest;
 import com.ecommerce.user.dto.UserDTO;
 import com.ecommerce.user.entity.User;
+import com.ecommerce.user.metrics.UserMetricsRecorder;
 import com.ecommerce.user.repository.UserRepository;
 import com.ecommerce.user.util.JwtUtil;
+import io.micrometer.observation.annotation.Observed;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -26,15 +28,19 @@ public class UserService {
     private final KafkaTemplate<String, Object> kafkaTemplate;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
+    private final UserMetricsRecorder metricsRecorder;
     
     public UserService(UserRepository userRepository, KafkaTemplate<String, Object> kafkaTemplate,
-                      PasswordEncoder passwordEncoder, JwtUtil jwtUtil) {
+                      PasswordEncoder passwordEncoder, JwtUtil jwtUtil,
+                      UserMetricsRecorder metricsRecorder) {
         this.userRepository = userRepository;
         this.kafkaTemplate = kafkaTemplate;
         this.passwordEncoder = passwordEncoder;
         this.jwtUtil = jwtUtil;
+        this.metricsRecorder = metricsRecorder;
     }
     
+    @Observed(name = "user.login", contextualName = "user-login")
     public AuthResponse login(LoginRequest request) {
         User user = userRepository.findByUsername(request.getUsername())
             .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid username or password"));
@@ -44,6 +50,7 @@ public class UserService {
         }
         
         String token = jwtUtil.generateToken(user.getUsername());
+        metricsRecorder.recordLogin();
         return new AuthResponse(token, user.getUsername(), "Login successful");
     }
     
@@ -68,6 +75,7 @@ public class UserService {
     }
     
     @CacheEvict(value = "users", allEntries = true)
+    @Observed(name = "user.register", contextualName = "user-registration")
     public UserDTO createUser(User user) {
         if (userRepository.existsByUsername(user.getUsername())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Username already exists");
@@ -78,6 +86,7 @@ public class UserService {
         // Encode password before saving
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User savedUser = userRepository.save(user);
+        metricsRecorder.recordRegistration();
         
         // Publish user created event
         kafkaTemplate.send("user-events", "user.created", savedUser);
