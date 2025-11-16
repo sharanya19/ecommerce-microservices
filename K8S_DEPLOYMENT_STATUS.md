@@ -214,3 +214,5 @@ kubectl run -it --rm mysql-client --image=mysql:8.0 --restart=Never -- mysql -h 
 
 **Next**: Wait for pods to be `Running`, then test services via port-forward.
 
+
+

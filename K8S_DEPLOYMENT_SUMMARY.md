@@ -174,3 +174,5 @@ kubectl logs -n ecommerce -l app=user-service --tail=50
 
 **Deployment is 90% complete!** Just need images to be available. 🚀
 
+
+
