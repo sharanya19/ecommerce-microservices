@@ -36,7 +36,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: order-service
-        image: ecommerce/order-service:1.0.0
+        image: ghcr.io/sharanya19/ecommerce-order-service:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

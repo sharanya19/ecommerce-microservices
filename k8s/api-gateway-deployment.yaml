@@ -36,7 +36,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: api-gateway
-        image: ecommerce/api-gateway:1.0.0
+        image: ghcr.io/sharanya19/ecommerce-api-gateway:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http

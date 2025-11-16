@@ -36,7 +36,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: payment-service
-        image: ecommerce/payment-service:1.0.0
+        image: ghcr.io/sharanya19/ecommerce-payment-service:latest
         imagePullPolicy: IfNotPresent
         ports:
         - name: http
